@@ -1,0 +1,30 @@
+.authButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 90px;
+  font-size: 16px;
+  gap: 8px;
+  border: none;
+  background-color: #f3f4f6;
+  outline: none;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #9ca3af;
+    outline-offset: 2px;
+  }
+
+  svg {
+    height: 24px;
+    width: 24px;
+  }
+
+  &:hover {
+    background-color: #e5e7eb;
+  }
+  
+}

@@ -1,0 +1,148 @@
+.authModal {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 500px;
+  width: 100%;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow:
+  0 8px 20px rgba(0, 0, 0, 0.08),
+  0 2px 6px rgba(0, 0, 0, 0.04);
+  padding: 64px 48px 16px;
+
+  &__form {
+    margin-bottom: 16px;
+  }
+
+  &__title {
+    font-size: 24px;
+  }
+
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+    > * + * {
+      margin-top: 12px;
+    }
+  }
+
+  &__field {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 24px;
+  background-color: var(--mildgrey);
+    > * + * {
+      margin-top: 2px;
+    }
+  }
+
+  &__divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+    span {
+      color: #888;
+      font-size: 16px;
+      white-space: nowrap;
+    }
+
+    &::before,
+    &::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #e0e0e0;
+    }
+  }
+
+  &__footer {
+    margin: 0 auto;
+
+    p {
+      font-size: 14px;
+      margin: 0;
+    }
+  }
+
+  &__footerBtn {
+    background-color: white;
+    padding: 2px 4px;
+    border: none;
+    outline: none;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid #9ca3af;
+      outline-offset: 2px;
+    }
+
+    svg {
+      height: 24px;
+      width: 24px;
+    }
+
+    &:hover {
+      color: #f1bcc4;
+      border: none;
+    }
+  }
+
+  &__submit {
+    background-color: #f1edee;
+    width: 100%;
+
+    &:active {
+      outline: none;
+    }
+    &:hover {
+      border-color: #f2cfd4;
+    }
+
+     &:focus-visible {
+      outline: 2px solid #9ca3af;
+      outline-offset: 2px;
+    }
+  }
+
+    &__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    background: transparent;
+    border: none;
+    color: #6b7280;
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+
+    &:hover {
+      background-color: #f3f4f6;
+      color: #111827;
+    }
+
+    &:active {
+      background-color: #e5e7eb;
+    }
+
+    &:focus-visible {
+      outline: 2px solid #2563eb;
+      outline-offset: 2px;
+    }
+  }
+}

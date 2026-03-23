@@ -1,0 +1,29 @@
+.input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+
+  &__label {
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+
+  &__field {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    transition: all 0.2s ease;
+    border-radius: 8px;
+    padding: 8px 12px;
+    border: none;
+
+    &:hover {
+     background-color: #e5e7eb;
+    }
+
+    &:focus {
+      background-color: #ffffff;
+      box-shadow: 0 0 0 2px rgba(156, 163, 175, 0.2);
+      outline: none;
+    }
+  }
+}
