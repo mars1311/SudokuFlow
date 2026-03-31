@@ -2,13 +2,14 @@ import css from './AuthButton.module.scss';
 
 type AuthButtonProps = {
   text: string,
-  logo: React.FC<React.SVGProps<SVGSVGElement>>,
+  logo: React.ElementType,
+  onClick: () => void,
 }
-export const AuthButton = ({text, logo: Logo} : AuthButtonProps) => {
+export const AuthButton = ({text, logo: Logo, onClick} : AuthButtonProps) => {
   return (
-    <button className={css.authButton}>
+    <button className={css.authButton} onClick={onClick}>
       <Logo />
-      <span>Sign up with {text} </span>
+      <span> {text} </span>
     </button>
   )
 }

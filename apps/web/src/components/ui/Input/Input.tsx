@@ -5,23 +5,21 @@ type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   type: string,
   id: string,
   placeholder?: string;
-  value: string,
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  error?: string;
 };
 
-export const Input = ({ id, label, value, type, placeholder, onChange, ...props }: InputProps) => {
+export const Input = ({ id, label, type, placeholder, error, ...props }: InputProps) => {
   return (
     <div className={css.input}>
-      <label className={css.input__label}htmlFor={id}>{label}</label>
+      <label className={css.input__label} htmlFor={id}>{label}</label>
       <input
-        className={css.input__field}
+        className={`${css.input__field} ${error ? css.input__field_isError : ''}`}
         id={id}
         type={type}
-        value={value}
-        onChange={onChange}
         placeholder={placeholder}
         {...props }
       />
+      {error && <span className={css.input__error}>{error} </span>}
     </div>
   )
 }

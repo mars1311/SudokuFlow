@@ -1,46 +1,65 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import css from './AuthModal.module.scss';
-import { Input } from '../Input/Input';
+import { Input } from '../ui/Input/Input';
+import { useSignIn } from '../../hooks/useSignIn';
+import { signInSchema } from './schemas/SignInForm.schema';
+import { Loader } from '../ui/Loader/Loader';
 
-export const SignInForm = () => {
-  const [formData, setFormData] = useState({ email: '', password: '' });
-  
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
+interface FormData {
+  email: string;
+  password: string;
+}
+
+interface SignInFormProps {
+  onClose: () => void,
+  // onLoadingChange: (isLoading: boolean) => void,
+}
+
+export const SignInForm = ({ onClose, onLoadingChange }: SignInFormProps) => {
+  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({resolver: zodResolver(signInSchema)})
+  const { isLoading, error, signIn } = useSignIn();
+
+  const onSubmit = handleSubmit(async (data) => {
+    const user = await signIn(data.email, data.password)
+    if (user) {
+      onClose()
+    }
+  })
 
   return (
-    <form className={css.authModal__form}>
-      <div className={css.authModal__divider}>
-        <span>or sign in with email</span>
-      </div>
-      <div className={css.authModal__fields}>
-        <Input
-          label="Email Address"
-          id="email"
-          type="email"
-          value={formData.email}
-          placeholder="Enter your email"
-          required
-          onChange={handleChange}
-          aria-required="true"
-          autoComplete="email"
-        />
-        <Input
-          label="Password"
-          id="password-field"
-          type="password"
-          name="password"
-          value={formData.password}
-          placeholder="Enter your password"
-          required
-          onChange={handleChange}
-          aria-required="true"
-          autoComplete="current-password"
-        />
-      </div>
-      <button className={css.authModal__submit}> Sign In </button>
+    <form className={css.authModal__form} onSubmit={onSubmit}>
+      {isLoading ? <Loader /> : (
+        <>
+          <div className={css.authModal__divider}>
+            <span>or sign up with email</span>
+          </div>
+          <div className={css.authModal__fields}>
+            <Input
+              label="Email Address"
+              id="email"
+              type="email"
+              placeholder="Enter your email"
+              autoComplete="email"
+              error={errors.email?.message}
+              autoFocus
+              {...register('email')}
+            />
+            <Input
+              label="Password"
+              id="password"
+              type="password"
+              placeholder="Enter your password"
+              autoComplete="new-password"
+              error={errors.password?.message}
+              {...register('password')}
+            />
+          </div>
+          {error && <p className={css.authModal__error}>Error: {error}</p>}
+          <button className={css.authModal__submit}> Sign In </button>
+        </>
+      )}
     </form>
   );
 };

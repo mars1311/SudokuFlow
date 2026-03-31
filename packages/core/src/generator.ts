@@ -49,7 +49,7 @@ export const parseBoard = (value: number[][]) => {
     )
   });
 
-  console.log(parsedBoard)
+  // console.log(parsedBoard)
 
   return parsedBoard;
 }

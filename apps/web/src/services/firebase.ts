@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, connectAuthEmulator } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA0zuDk-cQycqZjkTncTXC4y1vQXAZyW-0",
@@ -15,8 +15,9 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-
+onAuthStateChanged(auth, (user) => {
+  console.log('Current user:', user)
+})
 const analytics = getAnalytics(app);
-connectAuthEmulator(auth, "http://localhost:5173/");
 
 export { auth, app, analytics};

@@ -1,34 +1,36 @@
 import { useState } from 'react';
-import { signUpWithEmail } from '../services/authService';
+import { signInWithEmail } from '../services/authService';
 import { FirebaseError } from 'firebase/app';
 import useSudokuStore from '../store/store';
-import { auth } from '../services/firebase';
 
-interface SignUpState {
+interface SignInState {
   isLoading: boolean;
   error: string | null;
 }
 
 const FIREBASE_ERRORS: Record<string, string> = {
-  'auth/email-already-in-use': 'An account with this email already exists.',
-  'auth/weak-password': 'Password must be at least 6 characters.',
+  'auth/invalid-credential': 'Invalid email or password.',
+  'auth/user-not-found': 'No account found with this email.',
+  'auth/wrong-password': 'Incorrect password.',
+  'auth/too-many-requests': 'Too many attempts. Please try again later.',
+  'auth/user-disabled': 'This account has been disabled.',
   'auth/invalid-email': 'Please enter a valid email address.',
-};
+}
 
-export const useSignUp = () => {
+export const useSignIn = () => {
   const { setCurrentUser } = useSudokuStore()
 
-  const [authState, setAuthState] = useState<SignUpState>({
+  const [authState, setAuthState] = useState<SignInState>({
     isLoading: false,
     error: null
   })
 
-  const signUp = async (name: string, email: string, password: string) => {
+  const signIn = async (email: string, password: string) => {
     setAuthState({ isLoading: true, error: null });
     try {
-      const user = await signUpWithEmail(name, email, password)
+      const user = await signInWithEmail(email, password)
       setAuthState({ isLoading: false, error: null });
-      setCurrentUser(user);
+      setCurrentUser(user)
       return user;
     }
     catch(error) {
@@ -39,8 +41,9 @@ export const useSignUp = () => {
         isLoading: false,
         error: message
       })
+
       return null
     }
   }
-  return {...authState, signUp}
+  return {...authState, signIn}
 };

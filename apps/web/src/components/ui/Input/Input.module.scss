@@ -8,6 +8,11 @@
     margin-bottom: 4px;
   }
 
+  &__error {
+    color: 	#ff4545;
+    font-size: 12px;
+  }
+
   &__field {
     background-color: #f9fafb;
     border: 1px solid #e5e7eb;
@@ -16,14 +21,26 @@
     padding: 8px 12px;
     border: none;
 
+    &_isError {
+      border: 1px solid #ff4545;
+      background-color: #ffffff;
+    }
+
+    &_isError:focus {
+      box-shadow: 0 0 0 3px rgba(255, 69, 69, 0.3);
+    }
+
     &:hover {
      background-color: #e5e7eb;
     }
 
     &:focus {
       background-color: #ffffff;
-      box-shadow: 0 0 0 2px rgba(156, 163, 175, 0.2);
       outline: none;
+    }
+
+    &:focus:not(.input__field_isError) {
+      box-shadow: 0 0 0 2px rgba(156, 163, 175, 0.2);
     }
   }
 }

@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import css from './AuthModal.module.scss';
-import { Input } from '../Input/Input';
+import { Input } from '../ui/Input/Input';
 import { useSignUp } from '../../hooks/useSignUp';
+import { signUpSchema } from './schemas/SignUpForm.schema';
 
 interface FormData {
   name: string;
@@ -9,86 +12,72 @@ interface FormData {
   password: string;
   confirmPassword: string;
 }
-export const SignUpForm = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-  });
 
-  const INITIAL_FORM: FormData = {
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-  };
+interface SignUpFormProps {
+  onClose: () => void,
+  // onLoadingChange: (isLoading: boolean) => void,
+}
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const [formData, setFormData] = useState<FormData>(INITIAL_FORM);
-    const [validationError, setValidationError] = useState<string | null>(null);
-    const {isLoading, error, signUp} = useSignUp();
+export const SignUpForm = ({ onClose }: SignUpFormProps) => {
+  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({ resolver: zodResolver(signUpSchema) })
+  const { error, signUp } = useSignUp();
 
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
+
+  const onSubmit = handleSubmit(async (data) => {
+    const user = await signUp(data.name, data.email, data.password)
+    if (user) {
+      onClose()
+    }
+  })
 
   return (
-    <form className={css.authModal__form}>
-      <div className={css.authModal__divider}>
-        <span>or sign up with email</span>
-      </div>
-      <div className={css.authModal__fields}>
-        <Input
-          label="Full Name"
-          id="name"
-          name="name"
-          type="text"
-          value={formData.name}
-          placeholder="Enter your full name"
-          required
-          onChange={handleChange}
-          aria-required="true"
-          autoComplete="name"
-        />
-        <Input
-          label="Email Address"
-          id="email"
-          name="email"
-          type="email"
-          value={formData.email}
-          placeholder="Enter your email"
-          required
-          onChange={handleChange}
-          aria-required="true"
-          autoComplete="email"
-        />
-        <Input
-          label="Password"
-          id="password"
-          name="password"
-          type="password"
-          value={formData.password}
-          placeholder="Enter your password"
-          required
-          onChange={handleChange}
-          aria-required="true"
-          autoComplete="new-password"
-        />
-        <Input
-          label="Confirm Password"
-          id="confirm-password"
-          name="confirmPassword"
-          type="password"
-          value={formData.confirmPassword}
-          placeholder="Confirm your password"
-          required
-          onChange={handleChange}
-          aria-required="true"
-          autoComplete="new-password"
-        />
-      </div>
-      <button className={css.authModal__submit}> Sign Up </button>
+    <form className={css.authModal__form} onSubmit={onSubmit}>
+      <>
+        <div className={css.authModal__divider}>
+          <span>or sign up with email</span>
+        </div>
+        <div className={css.authModal__fields}>
+          <Input
+            label="Full Name"
+            id="name"
+            type="text"
+            placeholder="Enter your full name"
+            autoComplete="name"
+            error={errors.name?.message}
+            autoFocus
+            {...register('name')}
+          />
+          <Input
+            label="Email Address"
+            id="email"
+            type="email"
+            placeholder="Enter your email"
+            autoComplete="email"
+            error={errors.email?.message}
+            {...register('email')}
+          />
+          <Input
+            label="Password"
+            id="password"
+            type="password"
+            placeholder="Enter your password"
+            autoComplete="new-password"
+            error={errors.password?.message}
+            {...register('password')}
+          />
+          <Input
+            label="Confirm Password"
+            id="confirm-password"
+            type="password"
+            placeholder="Confirm your password"
+            autoComplete="new-password"
+            error={errors.confirmPassword?.message}
+            {...register('confirmPassword')}
+          />
+        </div>
+        {error && <p className={css.authModal__error}>Error: {error}</p>}
+        <button type="submit" className={css.authModal__submit}> Sign Up </button>
+      </>
     </form>
   );
 };
