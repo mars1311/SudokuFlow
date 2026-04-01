@@ -1,11 +1,14 @@
 import { useEffect, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
+import { Loader } from '../Loader/Loader';
+
 // import LiquidGlass from 'liquid-glass-react'
 import css from './Modal.module.scss';
 
 
 interface ModalProps {
   isOpen: boolean,
+  isLoading: boolean,
   onClose: () => void,
   children: ReactNode
 
@@ -14,6 +17,7 @@ interface ModalProps {
 }
 export const Modal = ({
   isOpen,
+  isLoading,
   onClose,
   children,
   closeOnBackdropClick = true,
@@ -32,7 +36,6 @@ export const Modal = ({
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, closeOnEsc, onClose]);
 
-  // disable scroll
    useEffect(() => {
     if (!isOpen) return;
 
@@ -56,9 +59,10 @@ export const Modal = ({
     <div className={css.modalPortal} onClick={onHandleClose}
       role="dialog" aria-modal="true">
       <div className={css.modalPortal__content} onClick={(e) => e.stopPropagation()}>
-          <button className={css.modalPortal__close} onClick={onClose} aria-label="Close" />
+        <button className={css.modalPortal__close} onClick={onClose} aria-label="Close" />
         {children}
       </div>
+      {isLoading && <Loader />}
     </div>,
     document.body
   );

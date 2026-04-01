@@ -1,0 +1,137 @@
+.signForm {
+  &__title {
+    font-size: 24px;
+  }
+
+  &__form {
+    margin-top: 16px;
+  }
+
+  &__divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    span {
+      color: #888;
+      font-size: 14px;
+      white-space: nowrap;
+      text-transform: lowercase;
+    }
+
+    &::before,
+    &::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #e0e0e0;
+    }
+  }
+
+  &__fields {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__error {
+    color: 	#ff4545;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+
+  &__submitBtn {
+    background-color: #64748B;
+    width: 100%;
+    transition: background-color 0.2s ease;
+    outline: none;
+    border: none;
+    color: white;
+
+    &:active {
+      outline: none;
+      background-color: #334155;
+    }
+
+    &:hover {
+      background-color: #475569;
+    }
+
+    &:focus,
+    &:focus-visible {
+      outline: 2px solid #c0c9d9;
+      outline-offset: 2px;
+    }
+  }
+  
+  &__footer {
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 4px;
+
+    p {
+      font-size: 14px;
+      margin: 0;
+    }
+  }
+
+  &__footerBtn {
+    background-color: white;
+    padding: 2px 4px;
+    border: none;
+    outline: none;
+    color:  #64748B;;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid #9ca3af;
+      outline-offset: 2px;
+    }
+
+    svg {
+      height: 24px;
+      width: 24px;
+    }
+
+    &:hover {
+      color: #f1bcc4;
+      border: none;
+    }
+  }
+
+  &__forgotPassword {
+    background: none;
+    border: none;
+    padding: 0;
+    margin-top: 6px;
+
+    font-size: 14px;
+    color: #6b7280;
+    cursor: pointer;
+    text-underline-offset: 2px;
+
+    transition: color 0.2s ease, opacity 0.2s ease;
+    align-self: flex-end;
+
+    &:focus {
+      outline: none;
+    }
+    
+    &:hover {
+      color: #111;
+    }
+
+    &:active {
+      opacity: 0.6;
+    }
+
+    &:focus-visible {
+      outline: 2px solid #111;
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+  }
+}

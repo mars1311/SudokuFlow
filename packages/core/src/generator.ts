@@ -49,8 +49,6 @@ export const parseBoard = (value: number[][]) => {
     )
   });
 
-  // console.log(parsedBoard)
-
   return parsedBoard;
 }
   

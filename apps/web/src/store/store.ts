@@ -7,7 +7,7 @@ interface SudokuStore {
   currentUser: FirebaseUser | null,
   userProfile: User | null,
   currentBoard: Board | null,
-  setCurrentUser: (user: FirebaseUser) => void,
+  setCurrentUser: (user: FirebaseUser | null) => void,
   setUserProfile: (user: User | null) => void,
   setBoard: (board: Board) => void,
 

@@ -1,49 +1,46 @@
-import { useState, useEffect } from 'react';
-import css from './AuthModal.module.scss';
-import { OAuthButtons } from './OAuthButtons';
-import { SignInForm } from './SignInForm';
-import { SignUpForm } from './SignUpForm';
+import { SignInForm } from '../SignForm/SignInForm';
+import { SignUpForm } from '../SignForm/SignUpForm';
 import { Modal } from '../ui/Modal/Modal';
-import { Loader } from '../ui/Loader/Loader';
-interface AuthModalInterface {
+import { useAuthModal } from '../../hooks/useAuthModal';
+import { PasswordRecovery } from '../PasswordRecovery/PasswordRecovery';
+interface AuthModalProps {
   isOpen: boolean,
   onClose: () => void,
 }
-export const AuthModal = ({ isOpen, onClose }: AuthModalInterface) => {
-  const [isLoading, setIsLoading] = useState(false)
 
-  useEffect(() => {
-    const handleEscapeKey = (event: KeyboardEvent) => {
-      if (event.code === 'Escape') {
-        onClose()
-      }
+export const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
+  const { mode, isLoading, error, toggleMode, setMode, setIsLoading } = useAuthModal();
+
+const renderContent = () => {
+    switch (mode) {
+      case 'signin':
+        return (
+          <SignInForm
+            onClose={onClose}
+            onToggleMode={toggleMode}
+            setIsLoading={setIsLoading}
+            onForgotPassword={() => setMode('recovery')}
+          />
+        );
+      case 'signup':
+        return (
+          <SignUpForm
+            onClose={onClose}
+            onToggleMode={toggleMode}
+            setIsLoading={setIsLoading}
+          />
+        );
+      case 'recovery':
+        return <PasswordRecovery onBack={() => setMode('signin')} />;
+      default:
+        return null;
     }
-    document.addEventListener('keydown', handleEscapeKey)
-    return () => document.removeEventListener('keydown', handleEscapeKey)
-  }, [])
+  };
 
-  const [mode, setMode] = useState<'signin' | 'signup'>('signup');
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <>
-          <h1 className={css.authModal__title}>Don&apos;t lose your progress!</h1>
-          <OAuthButtons mode={mode} onClose={onClose} />
-          {mode === 'signin'
-            ? <SignInForm onClose={onClose} />
-            : <SignUpForm onClose={onClose} />
-          }
-          <footer className={css.authModal__footer}>
-            {mode === 'signin'
-              ? <p>Don't have an account? <button className={css.authModal__footerBtn} onClick={() => setMode('signup')}>Sign up</button></p> // temporary classname
-              : <p>Already have an account? <button className={css.authModal__footerBtn} onClick={() => setMode('signin')}>Sign in</button></p> // temporary classname
-            }
-          </footer>
-        </>
-      )
-      }
+    <Modal isOpen={isOpen} onClose={onClose} isLoading={isLoading}>
+      {error && <p>{error} </p>}
+      {renderContent()}
     </Modal>
   );
 }

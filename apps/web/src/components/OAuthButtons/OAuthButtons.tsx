@@ -1,28 +1,26 @@
 import { AuthButton } from '../AuthButton/AuthButton';
-import css from './AuthModal.module.scss';
 import GoogleIcon from '../../assets/google.svg?react';
 import { useGoogleAuthSignIn } from '../../hooks/useGoogleAuth';
-interface OAuthButtons {
-  mode: 'signup' | 'signin',
+import css from './OAuthButtons.module.scss';
+
+interface OAuthButtonsProps {
+  actionText: string,
   onClose: () => void,
 }
 
-export const OAuthButtons = ({ mode, onClose }: OAuthButtons) => {
+export const OAuthButtons = ({ actionText, onClose }: OAuthButtonsProps) => {
   const { googleAuthSignIn } = useGoogleAuthSignIn();
   
   const onSubmit = async () => {
     const user = await googleAuthSignIn();
-
     if(user) {
       onClose()
     }
   }
 
-  const text = mode === 'signin' ? 'Sign in with' : 'Signup with';
-
   return (
-   <div className={css.authModal__authBtns}>
-      <AuthButton text={text + ' ' + 'Google'} logo={GoogleIcon} onClick={onSubmit} />
+   <div className={css.OAuthButtons}>
+      <AuthButton text={`${actionText} with google`} logo={GoogleIcon} onClick={onSubmit} />
     </div>
   )
 };

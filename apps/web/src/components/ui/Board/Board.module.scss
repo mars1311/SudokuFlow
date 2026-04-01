@@ -1,0 +1,31 @@
+.sudoku {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+
+  width: min(90vw, 540px); /* bigger max size */
+  aspect-ratio: 1;
+
+  border: 3px solid #000;
+}
+
+.sudoku__cell {
+  width: 100%;
+  height: 100%;
+
+  border: 1px solid #ccc;
+
+  text-align: center;
+  font-size: 28px; /* bigger numbers */
+  font-weight: 500;
+
+  outline: none;
+}
+
+/* thicker 3x3 borders */
+.cell--right-bold {
+  border-right: 3px solid #000;
+}
+
+.cell--bottom-bold {
+  border-bottom: 3px solid #000;
+}

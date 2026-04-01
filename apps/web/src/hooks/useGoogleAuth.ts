@@ -32,7 +32,6 @@ export const useGoogleAuthSignIn = () => {
       return user;
     }
     catch(error) {
-      console.log('error', error);
        const message = error instanceof FirebaseError
         ? (GOOGLE_AUTH_ERRORS[error.code] ?? 'Something went wrong. Please try again.')
         : 'Something went wrong. Please try again.';
