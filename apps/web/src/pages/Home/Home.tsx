@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { AuthModal } from "../../components/AuthModal/AuthModal";
 import useSudokuStore from "../../store/store";
 import { Board } from "../../components/ui/Board/Board";

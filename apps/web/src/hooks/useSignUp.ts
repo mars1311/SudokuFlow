@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { signUpWithEmail } from '../services/authService';
 import { FirebaseError } from 'firebase/app';
 import useSudokuStore from '../store/store';
-import { auth } from '../services/firebase';
 
 interface SignUpState {
   isLoading: boolean;
