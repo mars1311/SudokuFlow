@@ -1,8 +1,9 @@
 import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from './services/firebase';
-import { generateBoard } from '@sudoku/core/game/generator';
+import { auth } from '@sudoku/firebase';
+import { generateBoard } from '@sudoku/core'
+
 import { Home } from './pages/Home/Home';
 import { NotFound } from "./pages/NotFound/NotFound";
 import useSudokuStore from "./store/store";

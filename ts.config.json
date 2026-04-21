@@ -1,8 +1,0 @@
-"compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@sudoku/ui/*": ["packages/ui/src/*"],
-      "@sudoku/core/*": ["packages/core/src/*"],
-      "@sudoku/features/*": ["packages/features/*"]
-    }
-  }

@@ -1,13 +1,13 @@
 import { useState, useEffect, useCallback, act } from "react";
 import useSudokuStore from "../../store/store";
-import { useLoadGame } from '../../hooks/useLoadGame';
-import { useInitGame } from '../../hooks/useInitGame';
-import { useBoardActions } from '../../hooks/useBoardActions';
-import { AuthModal } from "../../components/AuthModal/AuthModal";
-import { Header } from '../../components/Header/Header';
-import { Menu } from '../../components/Menu/Menu';
-import { Board } from "../../components/ui/Board/Board";
-import { Loader } from '../../components/ui/Loader/Loader';
+import { useLoadGame } from "../../modules/game/hooks/useLoadGame";
+import { useInitGame } from '../../modules/game/hooks/useInitGame';
+import { useBoardActions } from '../../modules/game/hooks/useBoardActions';
+import { AuthModal } from '../../modules/auth/AuthModal/AuthModal';
+import { Header } from '../../shared/layout/Header/Header';
+import { Menu } from '../../modules/game/Menu/Menu';
+import { Board } from "../../modules/game/Board/Board";
+import { Loader } from '@sudoku/ui/web/Loader/Loader';
 
 export const Home = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
