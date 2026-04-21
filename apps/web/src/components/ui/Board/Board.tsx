@@ -1,22 +1,36 @@
+import type { BoardType } from '@sudoku/core/types/types'
+import { BoardCell } from '../BoardCell/BoardCell';
 
 import css from './Board.module.scss';
 
-type Props = {
-  size?: number; // default 9
-};
+interface SudokuBoardProps {
+  handleCellClick: (row: number, col: number) => void;
+  handleChangeValue: (row: number, col: number, value: number) => void;
+  board: BoardType | null;
+}
 
-export const Board = ({ size = 9 }: Props) => {
-  const cells = Array.from({ length: size * size });
+export const Board = ({ board, handleChangeValue, handleCellClick }: SudokuBoardProps) => {
 
-  return (
-    <div className={css.sudoku}>
-      {cells.map((_, i) => (
-        <input
-          key={i}
-          className={css.sudoku__cell}
-          maxLength={1}
-        />
-      ))}
-    </div>
-  );
-};
+  if (!board) return null;
+
+    return (
+      <div className={css.board}>
+        {board.map((row, rowIndex) =>
+          row.map((cell, colIndex) => (
+            <BoardCell
+              key={`${rowIndex}-${colIndex}`}
+              row={rowIndex}
+              col={colIndex}
+              value={cell.value}
+              isReadOnly={cell.isReadOnly}
+              isWrong={cell.isWrong}
+              isFocused={cell.isFocused}
+              isHighlighted={cell.isHighlighted}
+              onChangeValue={handleChangeValue}
+              onClick={handleCellClick}
+            />
+          ))
+        )}
+      </div>
+    );
+  };

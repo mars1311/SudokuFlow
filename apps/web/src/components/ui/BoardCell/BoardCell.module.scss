@@ -1,0 +1,55 @@
+.boardCell {
+  width: clamp(36px, 6vw, 60px);
+  aspect-ratio: 1 / 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1.4rem;
+  font-weight: 500;
+
+  outline: none;
+  background: #f8fafc; // light base
+  color: #0f172a;
+
+   border-right: 1px solid #cbd5e1;
+  border-bottom: 1px solid #cbd5e1;
+  user-select: none;
+
+  &_isReadOnly {
+    font-weight: 700;
+    color: #020617;
+
+    background: #e2e8f0;
+
+    text-shadow: 0 0 4px rgba(0, 229, 255, 0.25);
+  }
+  
+  &_isFocused {
+    background: #ffffff;
+    box-shadow:
+      inset 0 0 0 2px #00e5ff,
+      0 0 8px rgba(0, 229, 255, 0.5);
+  }
+
+  &_isHighlighted {
+    background: rgba(255, 221, 0, 0.15);
+
+    box-shadow: inset 0 0 4px rgba(255, 221, 0, 0.5);
+  }
+
+  // ✅ WRONG (keep clear UX)
+  &_isWrong {
+    color: #dc2626;
+
+    box-shadow: inset 0 0 6px rgba(220, 38, 38, 0.4);
+  }
+
+  // ✨ hover (very subtle)
+  &:not(.boardCell_isReadOnly):not(.boardCell_isFocused):hover {
+    cursor: pointer;
+    background: #f1f5f9;
+    box-shadow: inset 0 0 4px rgba(0, 229, 255, 0.2);
+  }
+}

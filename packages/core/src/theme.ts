@@ -4,6 +4,4 @@ export const colors = {
   error: '#ff4444',
   lightgrey: '#f5f5f5',
   mildgrey: 'EFF0F2',
-
-  
 }

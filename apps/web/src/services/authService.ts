@@ -31,4 +31,4 @@ const resetPassword = async (email: string) => {
   await sendPasswordResetEmail(auth, email)
 }
 
-export { signUpWithEmail, signInWithEmail, signInWithGoogle, resetPassword};
+export { signUpWithEmail, signInWithEmail, signInWithGoogle, resetPassword, auth};
