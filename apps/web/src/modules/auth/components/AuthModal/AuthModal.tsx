@@ -1,8 +1,8 @@
-import { useAuthModal } from '../hooks/useAuthModal';
+import { useAuthModal } from '../../hooks/useAuthModal';
 import { Modal } from '@sudoku/ui/web/Modal/Modal';
 import { PasswordRecovery } from '../PasswordRecovery/PasswordRecovery';
 import { SignInForm } from '../SignForm/SignInForm';
-import { SignUpForm } from '../SignForm/SignUpForm';
+import { SignUpForm } from 'modules/auth';
 
 interface AuthModalProps {
   isOpen: boolean,

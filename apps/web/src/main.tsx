@@ -2,7 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { colors } from '@sudoku/core'
 
-import '../../../packages/firebase/src/firebase.ts'
+import '../../../packages/firebase/src/client/firebase.ts'
 
 import './index.css'
 import App from './App.tsx'

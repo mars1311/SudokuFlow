@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@sudoku/ui/web/Input/Input";
-import { useSignUp } from '../../auth/hooks/useSignUp';
+import { useSignUp } from '../../hooks/useSignUp';
 import { signUpSchema, type SignUpFormData } from '../AuthModal/schemas/SignUpForm.schema';
 import { OAuthButtons } from '../OAuthButtons/OAuthButtons';
 import css from './SignForm.module.scss';

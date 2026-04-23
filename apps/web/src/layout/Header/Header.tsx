@@ -1,12 +1,13 @@
 import { signOut } from 'firebase/auth';
 import { auth } from '@sudoku/firebase';
 import css from './Header.module.scss';
-import useSudokuStore from '../../../store/store';
+import useSudokuStore from '../../store/store';
+
 interface Header {
   name: string | null | undefined;
   handleOpenModal: () => void;
 
-}
+};
 
 export const Header = ({name, handleOpenModal}: Header) => {
   const currentUser = useSudokuStore(state => state.currentUser);

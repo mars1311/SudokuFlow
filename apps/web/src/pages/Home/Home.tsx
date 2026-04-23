@@ -1,12 +1,12 @@
-import { useState, useEffect, useCallback, act } from "react";
+import { useState, useEffect, useCallback } from "react";
 import useSudokuStore from "../../store/store";
-import { useLoadGame } from "../../modules/game/hooks/useLoadGame";
-import { useInitGame } from '../../modules/game/hooks/useInitGame';
-import { useBoardActions } from '../../modules/game/hooks/useBoardActions';
-import { AuthModal } from '../../modules/auth/AuthModal/AuthModal';
-import { Header } from '../../shared/layout/Header/Header';
-import { Menu } from '../../modules/game/Menu/Menu';
-import { Board } from "../../modules/game/Board/Board";
+import { useLoadGame } from "modules/game/hooks/useLoadGame";
+import { useInitGame } from 'modules/game/hooks/useInitGame';
+import { useBoardActions } from 'modules/game/hooks/useBoardActions';
+import { AuthModal } from 'modules/auth';
+import { Header } from 'layout/Header/Header';
+import { Menu } from 'modules/game/components/Menu/Menu';
+import { Board } from "modules/game/components/Board/Board";
 import { Loader } from '@sudoku/ui/web/Loader/Loader';
 
 export const Home = () => {

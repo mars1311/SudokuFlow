@@ -1,6 +1,6 @@
-import { AuthButton } from '../AuthButton/AuthButton';
-import GoogleIcon from '../../../assets/google.svg?react';
-import { useGoogleAuthSignIn } from '../hooks/useGoogleAuth';
+import { AuthButton } from 'modules/auth';
+import GoogleIcon from '../../../../assets/google.svg?react';
+import { useGoogleAuthSignIn } from 'modules/auth';
 import css from './OAuthButtons.module.scss';
 
 interface OAuthButtonsProps {

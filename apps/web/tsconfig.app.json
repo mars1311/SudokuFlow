@@ -1,5 +1,12 @@
 {
   "compilerOptions": {
+    "ignoreDeprecations": "6.0",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "modules/*": ["src/modules/*"],
+      "layout/*": ["src/layout/*"]
+    },
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2022",
     "useDefineForClassFields": true,
@@ -24,5 +31,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "src/modules/auth/hooks/useAuthModal.ts", "../../packages/firebase/src/firebase.ts", "../../packages/firebase/src/authService.ts"]
+  "include": ["src", "src/modules/auth/hooks/useAuthModal.ts", "../../packages/firebase/src/client/firebase.ts", "../../packages/firebase/src/services/authService.ts"]
 }

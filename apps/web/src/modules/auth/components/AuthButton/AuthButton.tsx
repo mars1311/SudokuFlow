@@ -5,6 +5,7 @@ type AuthButtonProps = {
   logo: React.ElementType,
   onClick: () => void,
 }
+
 export const AuthButton = ({text, logo: Logo, onClick} : AuthButtonProps) => {
   return (
     <button className={css.authButton} onClick={onClick}>

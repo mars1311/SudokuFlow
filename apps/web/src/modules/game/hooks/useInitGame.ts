@@ -12,6 +12,7 @@ export const useInitGame = () => {
 
   const initGame = async () => {
     try {
+      if (!currentUser)
       if (!currentUser) throw new Error('No user logged in');
       setIsLoading(true)
       const raw = await generateBoard()
